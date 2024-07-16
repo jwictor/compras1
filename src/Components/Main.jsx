@@ -1,7 +1,13 @@
+import { Outlet } from "react-router-dom";
+
+
+
 function Main () {
     return(
         <div className="container-main">
-            <h1>Main</h1>
+            
+            <Outlet />
+            
         </div>
     )
 }
