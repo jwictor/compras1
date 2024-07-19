@@ -34,7 +34,7 @@ const protectedRoute = createBrowserRouter([{
   ]
 }])
 
-const route = localStorage.getItem("@compras1/displayname") === null ? publicRoute : protectedRoute;
+const route = localStorage.getItem("@compras/displayname") === null ? publicRoute : protectedRoute;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
