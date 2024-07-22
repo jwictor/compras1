@@ -5,12 +5,13 @@ import { fetchUserInfo } from '../services/api'
 
 function Login() {
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
     const fnConfirmar = async (event) => {
         event.preventDefault();
-
+        setLoading(true);
         console.log("EVENTO CONFIRMAR =>", event)
 
         const username = event.target.form.username.value;
@@ -41,11 +42,19 @@ function Login() {
               const userInfo = await fetchUserInfo(username);
               localStorage.setItem('user_id', userInfo.id);
 
-              console.log('USUARIO => ', userInfo);
-        
-              navigate('/home');
+              console.log('USUARIO => ', userInfo.userName);
+             
+              if(userInfo.emails.length === 1){
+                localStorage.setItem("@compras/displayname", userInfo.userName);
+                navigate('/home');
+                 window.location.reload();
+              }
+              
             } catch (error) {
               setError('Credenciais inválidas');
+              console.log("ERRO => ", error)
+              setLoading(false);
+
             }
 
 
@@ -83,11 +92,14 @@ function Login() {
                 <label htmlFor="">Senha</label>
                 <input type="password" name="password" />
                 <div className="buttons">
-                    {error && <p>{error}</p>}
-                    <button className="button-confirmar" onClick={(event) => fnConfirmar(event)}>Confirmar</button>
+                    <button disabled={loading} className="button-confirmar" onClick={(event) => fnConfirmar(event)}>Confirmar</button>
+                   
                     <button className="button-cancelar" onClick={(event) => fnCancelar(event)}>Cancelar</button>
+                    
                 </div>
+                {loading ? 'Carregando Logging in...' : ''}
             </form>
+            {error && <p>{error}</p>}
         </div>
     )
 }

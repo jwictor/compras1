@@ -6,7 +6,7 @@ function Header() {
         <NavLink to="/" className="logo">{`</1App>`}</NavLink>
         <nav className="nav-bar">
           {
-            localStorage.getItem('@1app/displayname') === null
+            localStorage.getItem('@compras/displayname') === null
             ?
           <>
           <NavLink to="/">Home</NavLink>
@@ -14,7 +14,7 @@ function Header() {
           </>
           :
           <>
-          <NavLink to="/">users</NavLink>
+          <NavLink to="/">Users</NavLink>
           <NavLink to="/logout">Logout</NavLink>
           </>
           }

@@ -26,6 +26,7 @@ const protectedRoute = createBrowserRouter([{
   element: <App />,
   children: [
     {path: '/', element: <Users />},
+    {path: '/home', element: <Home />},
     {path: '/users', element: <Users />},
     {path: '/users/:id', element: <UserDetails />},
     {path: '/newuser', element: <NewUser />},
